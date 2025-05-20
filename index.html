@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>متجر المنتجات</title>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Botpress Webchat Scripts -->
+  <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/05/16/15/20250516151504-NOZ5039Y.js"></script>
   <style>
     :root {
       --primary-color: #4a6da7;
@@ -163,6 +166,11 @@
     
     .status-dot.error {
       background-color: #dc3545;
+    }
+    
+    /* Ensure Botpress webchat is always visible */
+    .bp-widget {
+      z-index: 9999 !important;
     }
     
     /* Responsive adjustments */
@@ -369,6 +377,23 @@
       const testFilter = {category: "تليفونات", brand: "سامسونج"};
       console.log("تطبيق فلتر الاختبار:", testFilter);
       filterProducts(testFilter.category, testFilter.brand);
+
+      // Ensure Botpress chat is always available regardless of circumstances
+      // This checks if the botpress widget is loaded correctly and reinjects it if needed
+      setTimeout(() => {
+        if (!window.botpressWebChat || !document.querySelector('.bp-widget')) {
+          console.log('Reloading Botpress widget...');
+          
+          // Reload the scripts if they don't load properly
+          const injectScript = document.createElement('script');
+          injectScript.src = 'https://cdn.botpress.cloud/webchat/v2.5/inject.js';
+          document.head.appendChild(injectScript);
+          
+          const botScript = document.createElement('script');
+          botScript.src = 'https://files.bpcontent.cloud/2025/05/16/15/20250516151504-NOZ5039Y.js';
+          document.head.appendChild(botScript);
+        }
+      }, 3000);
     });
   </script>
 </body>
