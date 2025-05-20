@@ -1,0 +1,14 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# JS files
+*.js text
+*.json text
+
+# HTML and CSS files
+*.html text
+*.css text
+
+# Exclude files from exporting
+.gitattributes export-ignore
+.gitignore export-ignore 
